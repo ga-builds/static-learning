@@ -80,12 +80,12 @@
     }
   </style>
 
-  <!-- ✅ Full stylesheet -->
-  <link rel="preload" href="/assets/css/styles.css" as="style">
-  <link rel="stylesheet" href="/assets/css/styles.css" media="all">
+ <!-- ✅ Full stylesheet with cache busting -->
+<link rel="preload" href="/assets/css/styles.css?v=2.0" as="style">
+<link rel="stylesheet" href="/assets/css/styles.css?v=2.0" media="all">
+<!-- ✅ Defer JS with cache busting -->
+<script src="/assets/app.js?v=2.0" defer></script>
 
-  <!-- ✅ Defer JS -->
-  <script src="/assets/app.js" defer></script>
 </head>
 
 <body>
