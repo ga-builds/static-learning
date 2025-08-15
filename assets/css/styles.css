@@ -1,7 +1,7 @@
 /* ===== SOURCE SANS 3 – SELF-HOSTED (WOFF2 + WOFF) ===== */
-@font-face{font-family:"Source Sans 3";src:url("/assets/fonts/source-sans-3-regular.woff2"),url("/assets/fonts/source-sans-3-regular.woff");font-weight:400;font-style:normal;font-display:swap}
-@font-face{font-family:"Source Sans 3";src:url("/assets/fonts/source-sans-3-semibold.woff2"),url("/assets/fonts/source-sans-3-semibold.woff");font-weight:600;font-style:normal;font-display:swap}
-@font-face{font-family:"Source Sans 3";src:url("/assets/fonts/source-sans-3-bold.woff2"),url("/assets/fonts/source-sans-3-bold.woff");font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:"Source Sans 3";src:url("/assets/fonts/Source-Sans-3-Regular.woff2"),url("/assets/fonts/Source-Sans-3-Regular.woff");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Source Sans 3";src:url("/assets/fonts/Source-Sans-3-Semibold.woff2"),url("/assets/fonts/Source-Sans-3-Semibold.woff");font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:"Source Sans 3";src:url("/assets/fonts/Source-Sans-3-Bold.woff2"),url("/assets/fonts/Source-Sans-3-Bold.woff");font-weight:700;font-style:normal;font-display:swap}
 
 /* ===== THEME / VARIABLES ===== */
 :root{--bg:#fff;--bg-soft:#f8fafc;--bg-alt:#f1f5f9;--surface:#fff;--brand:#7b5cff;--cyan:#06b6d4;--amber:#f59e0b;--green:#10b981;--pink:#ec4899;--orange:#f97316;--blue:#3b82f6;--text:#1e293b;--text-soft:#475569;--text-muted:#64748b;--border:#e2e8f0;--border-soft:#f1f5f9;--glass:rgba(255,255,255,.8);--shadow:0 4px 24px rgba(0,0,0,.06);--shadow-lg:0 10px 40px rgba(0,0,0,.1);--radius:16px;--grad-hero:linear-gradient(135deg,rgba(123,92,255,.05),rgba(6,182,212,.05));--grad-timeline:linear-gradient(135deg,rgba(6,182,212,.08),rgba(16,185,129,.06));--grad-skills:linear-gradient(135deg,rgba(123,92,255,.06),rgba(236,72,153,.04));--grad-benefits:linear-gradient(135deg,rgba(245,158,11,.08),rgba(249,115,22,.06))}
