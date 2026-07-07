@@ -1,546 +1,1089 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- ✅ Required meta -->
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Applied AI Skills Program — Learn AI. Build Real Things.</title>
+<meta name="description" content="A 6-week live program that moves you from using AI to building with it. No coding required.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   0. DESIGN TOKENS
+   ============================================================ */
+:root{
+  --paper:#F6F5FB;
+  --surface:#FFFFFF;
+  --ink:#14152A;
+  --ink-2:#5B5E78;
+  --ink-3:#9C9FB8;
+  --violet:#6C4CF0;
+  --violet-deep:#4B2FD6;
+  --violet-soft:#EFEAFE;
+  --indigo:#3E6BF0;
+  --indigo-soft:#E8EEFF;
+  --teal:#0FBFA8;
+  --teal-deep:#0A8F7F;
+  --teal-soft:#E1FAF5;
+  --coral:#FF5A73;
+  --coral-deep:#D93A52;
+  --coral-soft:#FFE7EC;
+  --amber:#FFB020;
+  --amber-deep:#B37400;
+  --amber-soft:#FFF3DC;
+  --indigo-deep:#2A4FC7;
+  --line:#E7E6F3;
+  --line-2:#D6D5EC;
+  --shadow-sm: 0 2px 10px rgba(20,21,42,0.05);
+  --shadow-md: 0 10px 30px rgba(20,21,42,0.08);
+  --shadow-lg: 0 26px 60px rgba(20,21,42,0.14);
+  --font-display:'Space Grotesk', sans-serif;
+  --font-body:'Inter', sans-serif;
+  --font-mono:'IBM Plex Mono', monospace;
+  --container: 1180px;
+  --radius-lg: 28px;
+  --radius-md: 20px;
+  --radius-sm: 12px;
+  --ease: cubic-bezier(.16,.84,.44,1);
+  --grad-brand: linear-gradient(120deg, var(--violet) 0%, var(--indigo) 55%, var(--teal) 100%);
+  --grad-warm: linear-gradient(120deg, var(--coral) 0%, var(--amber) 100%);
+}
 
-  <!-- ✅ Security Headers -->
-  <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self';
-                 img-src 'self' https: data:;
-                 script-src 'self' 'unsafe-inline';
-                 style-src 'self' 'unsafe-inline';
-                 font-src 'self';
-                 connect-src 'self';
-                 object-src 'none';
-                 base-uri 'self';
-                 frame-ancestors 'none';
-                 upgrade-insecure-requests;">
-  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
-  <meta http-equiv="X-Content-Type-Options" content="nosniff">
-  <meta http-equiv="X-Frame-Options" content="DENY">
-  <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
+*,*::before,*::after{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--font-body);
+  font-size:16px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img,svg{ display:block; max-width:100%; }
+a{ color:inherit; text-decoration:none; }
+button{ font-family:inherit; cursor:pointer; border:none; background:none; color:inherit; }
+ul{ margin:0; padding:0; list-style:none; }
+h1,h2,h3,h4{ margin:0; font-family:var(--font-display); font-weight:600; letter-spacing:-0.02em; }
+p{ margin:0; }
 
-  <!-- ✅ SEO -->
-  <title>Glad Aura – Life Skills Audio Program</title>
-  <meta name="description" content="India’s first story-led life skills audio program for students in Grades 1–8. Building values, focus, confidence, and real-world thinking in just 20 minutes a week.">
-  <link rel="canonical" href="https://www.gladaura.com/">
+.wrap{ max-width:var(--container); margin:0 auto; padding:0 24px; }
+@media (min-width:640px){ .wrap{ padding:0 32px; } }
 
-  <!-- ✅ Favicons -->
-  <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
-  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+.grad-text{
+  background:var(--grad-brand);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
 
-  <!-- ✅ Preload self-hosted fonts -->
-  <link rel="preload" href="/assets/fonts/SourceSans3-Regular.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="/assets/fonts/SourceSans3-Semibold.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="/assets/fonts/SourceSans3-Bold.woff2" as="font" type="font/woff2" crossorigin>
+.eyebrow{
+  font-family:var(--font-mono);
+  font-size:12.5px;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  color:var(--violet-deep);
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  margin-bottom:16px;
+}
+.eyebrow::before{
+  content:'';
+  width:6px; height:6px; border-radius:50%;
+  background:var(--coral);
+  box-shadow:0 0 0 4px var(--coral-soft);
+  flex-shrink:0;
+}
 
-  <!-- ✅ Critical CSS inline (for above-the-fold hero only) -->
-  <style>
-    body {
-      font-family: 'SourceSans3', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f9f9fb;
-      color: #111827;
-    }
-    .hero {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 3rem 1rem;
-      text-align: center;
-    }
-    .hero h1 {
-      font-size: 2.5rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-    }
-    .hero p {
-      font-size: 1.125rem;
-      margin-bottom: 1.5rem;
-      color: #374151;
-    }
-    .hero .badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-      justify-content: center;
-    }
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      padding: 0.5rem 1rem;
-      font-size: 0.875rem;
-      background: #fff;
-      border: 1px solid #e5e7eb;
-      border-radius: 0.5rem;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-    }
-  </style>
+.section{ padding:88px 0; position:relative; scroll-margin-top:84px; }
+@media (min-width:768px){ .section{ padding:120px 0; } }
+.section-head{ max-width:640px; margin-bottom:48px; }
+@media (min-width:768px){ .section-head{ margin-bottom:64px; } }
+.section-head h2{ font-size:clamp(28px,4.6vw,44px); line-height:1.14; }
+.section-head p{ margin-top:16px; font-size:16.5px; color:var(--ink-2); max-width:520px; }
+.section-head.center{ margin-left:auto; margin-right:auto; text-align:center; }
 
- <!-- ✅ Full stylesheet with cache busting -->
-<link rel="preload" href="/assets/css/styles.css?v=2.0" as="style">
-<link rel="stylesheet" href="/assets/css/styles.css?v=2.0" media="all">
-<!-- ✅ Defer JS with cache busting -->
-<script src="/assets/app.js?v=2.0" defer></script>
+/* buttons */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:10px;
+  padding:15px 28px;
+  border-radius:100px;
+  font-family:var(--font-display);
+  font-weight:600;
+  font-size:15px;
+  letter-spacing:-0.01em;
+  transition:transform .35s var(--ease), box-shadow .35s var(--ease), filter .3s ease;
+  white-space:nowrap;
+}
+.btn-primary{
+  background:var(--grad-brand);
+  background-size:160% 160%;
+  color:#fff;
+  box-shadow:0 14px 28px rgba(76,54,222,0.32);
+}
+.btn-primary:hover{ filter:brightness(1.07); box-shadow:0 18px 36px rgba(76,54,222,0.42); }
+.btn-secondary{
+  background:var(--surface);
+  color:var(--ink);
+  border:1.5px solid var(--line-2);
+}
+.btn-secondary:hover{ border-color:var(--violet); color:var(--violet-deep); }
+.btn-coral{
+  background:var(--grad-warm);
+  color:#fff;
+  box-shadow:0 14px 30px rgba(255,90,115,0.32);
+}
+.btn-coral:hover{ filter:brightness(1.06); box-shadow:0 18px 36px rgba(255,90,115,0.42); }
+.btn-lg{ padding:18px 36px; font-size:16.5px; }
+.btn svg{ width:18px; height:18px; }
 
+/* ============================================================
+   1. SCROLL PROGRESS
+   ============================================================ */
+.progress-bar{
+  position:fixed; top:0; left:0; height:3px; width:0%;
+  background:var(--grad-brand);
+  z-index:999; transition:width .1s linear;
+}
+
+/* ============================================================
+   2. NAV
+   ============================================================ */
+.nav{
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  padding:18px 0;
+  transition:background .3s ease, box-shadow .3s ease, padding .3s ease;
+}
+.nav.scrolled{
+  background:rgba(246,245,251,0.82);
+  backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+  box-shadow:0 1px 0 var(--line);
+  padding:12px 0;
+}
+.nav .wrap{ display:flex; align-items:center; justify-content:space-between; }
+.brand{ display:flex; align-items:center; gap:10px; font-family:var(--font-display); font-weight:700; font-size:16px; }
+.brand-mark{ width:30px; height:30px; }
+.nav-links{ display:flex; gap:32px; font-size:14.5px; font-weight:500; color:var(--ink-2); }
+.nav-links a{ transition:color .2s ease; }
+.nav-links a:hover{ color:var(--ink); }
+@media (max-width:900px){ .nav-links{ display:none; } }
+.nav .btn{ padding:11px 22px; font-size:14px; }
+
+/* ============================================================
+   3. HERO
+   ============================================================ */
+.hero{
+  position:relative;
+  min-height:100vh;
+  min-height:100dvh;
+  display:flex; align-items:center;
+  padding-top:110px; padding-bottom:60px;
+  overflow:hidden;
+  background:
+    radial-gradient(120% 90% at 15% -10%, rgba(108,76,240,0.16), transparent 55%),
+    radial-gradient(100% 80% at 100% 0%, rgba(15,191,168,0.14), transparent 50%),
+    var(--paper);
+}
+.hero-blob{
+  position:absolute; border-radius:50%; filter:blur(70px); opacity:.55; pointer-events:none;
+  animation:blob-float 14s ease-in-out infinite;
+}
+.hero-blob.b1{ width:420px; height:420px; background:var(--violet); top:-140px; left:-120px; }
+.hero-blob.b2{ width:360px; height:360px; background:var(--teal); bottom:-140px; right:-100px; animation-delay:-4s; }
+.hero-blob.b3{ width:260px; height:260px; background:var(--amber); top:30%; right:10%; opacity:.28; animation-delay:-8s; }
+@keyframes blob-float{ 0%,100%{ transform:translate(0,0) scale(1);} 50%{ transform:translate(30px,-24px) scale(1.08);} }
+
+.hero-grid{
+  display:grid; grid-template-columns:1fr; gap:50px; align-items:center; position:relative; z-index:2;
+}
+@media (min-width:980px){ .hero-grid{ grid-template-columns:1.15fr 1fr; gap:40px; } }
+
+.hero-chip{
+  display:inline-flex; align-items:center; gap:8px;
+  background:var(--surface); border:1px solid var(--line-2); border-radius:100px;
+  padding:8px 16px 8px 8px; font-size:13px; font-weight:600; color:var(--ink-2);
+  box-shadow:var(--shadow-sm); margin-bottom:24px;
+}
+.hero-chip .dot-badge{
+  background:var(--grad-warm); color:#fff; font-family:var(--font-mono); font-size:10.5px; font-weight:500;
+  padding:4px 9px; border-radius:100px; letter-spacing:.04em;
+}
+.hero h1{
+  font-size:clamp(36px,6.6vw,72px);
+  line-height:1.06;
+  letter-spacing:-0.03em;
+}
+.hero-sub{
+  margin-top:24px;
+  font-size:18px; color:var(--ink-2); max-width:520px; line-height:1.65;
+}
+.hero-cta{ display:flex; align-items:center; gap:16px; margin-top:36px; flex-wrap:wrap; }
+.hero-trust{ display:flex; flex-wrap:wrap; gap:10px 22px; margin-top:40px; }
+.hero-trust .item{ display:flex; align-items:center; gap:8px; font-size:13.5px; color:var(--ink-2); font-weight:500; }
+.hero-trust .item .ic{ width:18px; height:18px; color:var(--teal); flex-shrink:0; }
+
+/* floating card collage */
+.hero-visual{
+  position:relative;
+  display:grid; grid-template-columns:1fr 1fr; gap:16px;
+  max-width:420px; margin:0 auto;
+}
+@media (min-width:980px){ .hero-visual{ margin:0 0 0 auto; } }
+.float-card{
+  background:rgba(255,255,255,0.75);
+  backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,0.6);
+  border-radius:20px;
+  padding:20px;
+  box-shadow:var(--shadow-lg);
+  animation:card-drift 6s ease-in-out infinite;
+}
+.float-card .ic-wrap{
+  width:42px; height:42px; border-radius:13px; display:flex; align-items:center; justify-content:center;
+  font-size:20px; margin-bottom:14px;
+}
+.float-card h5{ font-family:var(--font-display); font-size:15px; font-weight:600; margin-bottom:3px; }
+.float-card p{ font-size:12px; color:var(--ink-3); }
+.float-card.c1{ transform:rotate(-4deg) translateY(6px); }
+.float-card.c2{ transform:rotate(3deg) translateY(-14px); animation-delay:-1.5s; }
+.float-card.c3{ transform:rotate(2deg) translateY(-4px); animation-delay:-3s; }
+.float-card.c4{ transform:rotate(-3deg) translateY(16px); animation-delay:-4.5s; }
+@keyframes card-drift{ 0%,100%{ margin-top:0; } 50%{ margin-top:-10px; } }
+@media (max-width:640px){
+  .hero-visual{ max-width:340px; gap:12px; }
+  .float-card{ padding:14px; border-radius:16px; }
+  .float-card h5{ font-size:13px; }
+}
+
+/* ============================================================
+   4. GENERIC REVEAL
+   ============================================================ */
+.reveal{ opacity:0; transform:translateY(26px); transition:opacity .8s var(--ease), transform .8s var(--ease); }
+.reveal.in-view{ opacity:1; transform:translateY(0); }
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior:auto; }
+  .reveal{ opacity:1; transform:none; transition:none; }
+  *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; }
+}
+
+/* ============================================================
+   5. BENTO NETWORK (What Can You Build) — mobile-safe grid
+   ============================================================ */
+.network-section{ background:var(--ink); color:#fff; overflow:hidden; }
+.network-section .section-head p{ color:rgba(255,255,255,0.62); }
+.network-section .eyebrow{ color:var(--teal); }
+.network-section .eyebrow::before{ background:var(--teal); box-shadow:0 0 0 4px rgba(15,191,168,0.2); }
+
+.bento-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+@media (min-width:640px){ .bento-grid{ grid-template-columns:repeat(3,1fr); gap:14px; } }
+@media (min-width:980px){ .bento-grid{ grid-template-columns:repeat(4,1fr); gap:16px; } }
+
+.bento-card{
+  background:rgba(255,255,255,0.045);
+  border:1px solid rgba(255,255,255,0.09);
+  border-radius:18px;
+  padding:20px 18px;
+  min-height:150px;
+  display:flex; flex-direction:column; justify-content:space-between;
+  transition:transform .35s var(--ease), background .35s ease, border-color .35s ease;
+  cursor:default;
+}
+.bento-card:hover, .bento-card:focus-within{
+  transform:translateY(-4px);
+  background:rgba(255,255,255,0.08);
+  border-color:rgba(255,255,255,0.22);
+}
+.bento-icon{
+  width:40px; height:40px; border-radius:12px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:19px; margin-bottom:16px;
+}
+.bento-card h4{ font-size:14.5px; font-weight:600; color:#fff; margin-bottom:6px; letter-spacing:-0.01em; line-height:1.25; }
+.bento-card p{ font-size:12.5px; color:rgba(255,255,255,0.5); line-height:1.5; }
+
+.icon-violet{ background:rgba(108,76,240,0.22); color:#B7A6FF; }
+.icon-teal{ background:rgba(15,191,168,0.2); color:#7EEBDB; }
+.icon-coral{ background:rgba(255,90,115,0.2); color:#FFAEBB; }
+.icon-amber{ background:rgba(255,176,32,0.2); color:#FFD180; }
+
+/* ============================================================
+   6. LEARNING JOURNEY
+   ============================================================ */
+.journey-stages{ display:flex; gap:4px; flex-wrap:wrap; border-bottom:1px solid var(--line); margin-bottom:40px; overflow-x:auto; }
+.journey-stage{
+  padding:14px 20px; font-family:var(--font-mono); font-size:12.5px; letter-spacing:.03em;
+  color:var(--ink-3); border-bottom:2px solid transparent; position:relative; top:1px;
+  transition:color .25s ease, border-color .25s ease; white-space:nowrap;
+  display:flex; align-items:center; gap:8px;
+}
+.journey-stage .num{ color:var(--line-2); transition:color .25s ease; }
+.journey-stage:hover{ color:var(--ink); }
+.journey-stage.active{ color:var(--ink); border-color:var(--stage-color, var(--violet)); }
+.journey-stage.active .num{ color:var(--stage-color, var(--violet)); }
+
+.journey-panel{ display:none; }
+.journey-panel.active{ display:grid; grid-template-columns: 1fr; gap:32px; animation:panel-in .5s var(--ease); }
+@keyframes panel-in{ from{ opacity:0; transform:translateY(10px);} to{ opacity:1; transform:translateY(0);} }
+@media (min-width:900px){ .journey-panel.active{ grid-template-columns: 1fr 1.15fr; gap:56px; } }
+.journey-panel .module-tag{
+  font-family:var(--font-mono); font-size:12px; color:var(--stage-text, var(--teal)); letter-spacing:.06em; text-transform:uppercase; margin-bottom:14px;
+  display:inline-flex; align-items:center; gap:8px; padding:5px 12px 5px 5px; border-radius:100px;
+  background:var(--stage-soft, var(--teal-soft));
+}
+.journey-panel .module-tag::before{ content:''; width:16px; height:16px; border-radius:50%; background:var(--stage-color, var(--teal)); flex-shrink:0; }
+.journey-panel h3{ font-size:clamp(22px,2.8vw,32px); line-height:1.2; margin-bottom:16px; }
+.journey-panel .overview{ color:var(--ink-2); font-size:16px; margin-bottom:26px; }
+.journey-outcome{
+  display:flex; gap:12px; align-items:flex-start;
+  background:var(--stage-soft, var(--violet-soft)); border-radius:var(--radius-sm); padding:16px 18px;
+  font-size:14.5px; color:var(--stage-text, var(--violet-deep)); font-weight:500;
+}
+.journey-lists{ display:grid; gap:26px; }
+.journey-list-title{ font-family:var(--font-mono); font-size:12px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-3); margin-bottom:12px; }
+.journey-list ul li{ position:relative; padding-left:22px; margin-bottom:10px; font-size:14.5px; color:var(--ink-2); }
+.journey-list ul li::before{ content:''; position:absolute; left:0; top:9px; width:7px; height:1.5px; background:var(--violet); }
+.journey-build-chips{ display:flex; flex-wrap:wrap; gap:8px; }
+.chip{ font-size:13px; font-weight:500; padding:8px 14px; border-radius:100px; background:var(--surface); border:1px solid var(--line); color:var(--ink-2); }
+
+.launch-panel{ text-align:center; padding:10px 0; }
+.launch-panel .checks{ display:grid; grid-template-columns:1fr; gap:14px; text-align:left; max-width:720px; margin:32px auto 0; }
+@media (min-width:700px){ .launch-panel .checks{ grid-template-columns:repeat(2,1fr); } }
+.launch-panel .checks li{ display:flex; gap:10px; font-size:14.5px; color:var(--ink-2); align-items:flex-start; }
+.launch-panel .checks li .mark{ color:var(--teal); font-weight:700; flex-shrink:0; }
+
+/* ============================================================
+   7. WHAT YOU'LL SHIP — compact, grouped by module
+   ============================================================ */
+.ship-grid{ display:grid; grid-template-columns:1fr; gap:14px; }
+@media (min-width:700px){ .ship-grid{ grid-template-columns:repeat(2,1fr); } }
+@media (min-width:1080px){ .ship-grid{ grid-template-columns:repeat(3,1fr); gap:16px; } }
+.ship-card{
+  background:var(--surface); border:1px solid var(--line); border-top:3px solid var(--stage-color, var(--violet));
+  border-radius:var(--radius-md); padding:24px; position:relative; overflow:hidden;
+  transition:transform .35s var(--ease), box-shadow .35s var(--ease);
+}
+.ship-card::after{
+  content:''; position:absolute; top:-50px; right:-50px; width:120px; height:120px; border-radius:50%;
+  background:var(--stage-soft, var(--violet-soft)); opacity:.6; pointer-events:none;
+  transition:transform .4s var(--ease);
+}
+.ship-card:hover{ transform:translateY(-5px); box-shadow:var(--shadow-lg); }
+.ship-card:hover::after{ transform:scale(1.3); }
+.ship-card > *{ position:relative; z-index:1; }
+.ship-card .ship-tag{
+  font-family:var(--font-mono); font-size:11px; letter-spacing:.06em; text-transform:uppercase;
+  color:var(--stage-text, var(--violet-deep)); margin-bottom:10px; display:inline-flex; align-items:center; gap:7px;
+}
+.ship-card .ship-tag::before{ content:''; width:7px; height:7px; border-radius:50%; background:var(--stage-color, var(--violet)); }
+.ship-card h4{ font-size:18px; font-weight:600; margin-bottom:8px; letter-spacing:-0.01em; }
+.ship-card p{ font-size:13.5px; color:var(--ink-2); line-height:1.5; margin-bottom:16px; }
+.ship-chips{ display:flex; flex-wrap:wrap; gap:7px; }
+.ship-chips span{
+  font-size:12px; font-weight:500; padding:5px 12px; border-radius:100px;
+  background:var(--stage-soft, var(--violet-soft)); color:var(--stage-text, var(--violet-deep));
+}
+
+/* ============================================================
+   8. SNAPSHOT
+   ============================================================ */
+.snapshot-card{
+  background:var(--ink); color:#fff; border-radius:var(--radius-lg);
+  padding:40px 26px; display:grid; grid-template-columns:repeat(2,1fr); gap:30px 20px;
+  position:relative; overflow:hidden;
+}
+@media (min-width:700px){ .snapshot-card{ grid-template-columns:repeat(4,1fr); padding:56px; } }
+.snapshot-card::before{
+  content:''; position:absolute; width:500px; height:500px; border-radius:50%;
+  background:radial-gradient(circle, rgba(108,76,240,0.35), transparent 70%);
+  top:-220px; right:-160px; pointer-events:none;
+}
+.snap-item{ position:relative; z-index:1; }
+.snap-label{ font-family:var(--font-mono); font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:rgba(255,255,255,0.42); margin-bottom:8px; }
+.snap-value{ font-family:var(--font-display); font-size:21px; font-weight:600; letter-spacing:-0.01em; }
+.snap-value.accent{ color:var(--teal); }
+
+/* ============================================================
+   9. ACCORDION (curriculum + faq)
+   ============================================================ */
+.accordion-item{ border-bottom:1px solid var(--line); }
+.accordion-item:first-child{ border-top:1px solid var(--line); }
+.accordion-head{
+  width:100%; display:flex; align-items:center; justify-content:space-between; gap:18px;
+  padding:24px 4px; text-align:left;
+}
+.accordion-head .left{ display:flex; align-items:center; gap:16px; min-width:0; }
+.accordion-num{ font-family:var(--font-mono); font-size:13px; color:var(--violet); flex-shrink:0; width:24px; }
+.accordion-title{ font-family:var(--font-display); font-size:17px; font-weight:600; letter-spacing:-0.01em; }
+.accordion-icon{
+  width:30px; height:30px; border-radius:50%; border:1px solid var(--line-2); flex-shrink:0;
+  display:flex; align-items:center; justify-content:center; position:relative; transition:transform .4s var(--ease), background .3s ease, border-color .3s ease;
+}
+.accordion-icon::before, .accordion-icon::after{ content:''; position:absolute; background:var(--ink); transition:transform .3s ease, opacity .3s ease; }
+.accordion-icon::before{ width:10px; height:1.4px; }
+.accordion-icon::after{ width:1.4px; height:10px; }
+.accordion-item.open .accordion-icon{ background:var(--violet); border-color:var(--violet); transform:rotate(180deg); }
+.accordion-item.open .accordion-icon::before, .accordion-item.open .accordion-icon::after{ background:#fff; }
+.accordion-item.open .accordion-icon::after{ opacity:0; }
+.accordion-body{ max-height:0; overflow:hidden; transition:max-height .5s var(--ease); }
+.accordion-body-inner{ padding:4px 4px 36px 40px; display:grid; grid-template-columns:1fr; gap:26px; }
+@media (min-width:760px){ .accordion-body-inner{ grid-template-columns:1fr 1fr; gap:32px; } }
+.accordion-body .overview-text{ grid-column:1/-1; color:var(--ink-2); font-size:15px; margin-bottom:4px; }
+.accordion-col-title{ font-family:var(--font-mono); font-size:11.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-3); margin-bottom:12px; }
+.accordion-body .journey-outcome{ grid-column:1/-1; }
+
+/* ============================================================
+   10. PRICING
+   ============================================================ */
+.pricing-wrap{ display:flex; justify-content:center; }
+.price-card{
+  max-width:480px; width:100%; background:var(--surface); border:1px solid var(--line);
+  border-radius:var(--radius-lg); padding:40px 28px; box-shadow:var(--shadow-lg); position:relative; overflow:hidden;
+}
+@media (min-width:600px){ .price-card{ padding:52px 44px; } }
+.price-card::before{
+  content:''; position:absolute; top:-140px; left:-140px; width:320px; height:320px; border-radius:50%;
+  background:radial-gradient(circle, var(--violet-soft), transparent 70%); pointer-events:none;
+}
+.price-card::after{
+  content:''; position:absolute; bottom:-150px; right:-120px; width:280px; height:280px; border-radius:50%;
+  background:radial-gradient(circle, var(--teal-soft), transparent 70%); pointer-events:none;
+}
+.price-badge{
+  display:inline-flex; align-items:center; gap:8px; font-family:var(--font-mono); font-size:11px; letter-spacing:.06em; text-transform:uppercase;
+  background:var(--grad-warm); color:#fff; padding:8px 16px; border-radius:100px; margin-bottom:24px;
+  box-shadow:0 10px 22px rgba(255,90,115,0.3); position:relative; z-index:1;
+}
+.price-row{ display:flex; align-items:baseline; gap:14px; position:relative; z-index:1; flex-wrap:wrap; }
+.price-old{ font-family:var(--font-mono); font-size:19px; color:var(--ink-3); text-decoration:line-through; }
+.price-new{ font-family:var(--font-display); font-size:46px; font-weight:700; letter-spacing:-0.03em; }
+@media (min-width:600px){ .price-new{ font-size:52px; } }
+.price-note{ margin-top:6px; font-size:13.5px; color:var(--ink-2); }
+.price-features{ margin:30px 0; display:grid; gap:12px; }
+.price-features li{ display:flex; align-items:center; gap:12px; font-size:14.5px; color:var(--ink); }
+.price-features li .mark{
+  width:20px; height:20px; border-radius:50%; background:var(--teal-soft); color:var(--teal);
+  display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; flex-shrink:0;
+}
+.price-card .btn{ width:100%; }
+.price-foot{ margin-top:16px; text-align:center; font-size:13px; color:var(--ink-3); }
+
+/* ============================================================
+   11. FAQ
+   ============================================================ */
+.faq-list{ max-width:760px; margin:0 auto; display:grid; gap:14px; }
+.faq-list .accordion-item{
+  border:1px solid var(--line); border-bottom:1px solid var(--line);
+  border-radius:var(--radius-md); background:var(--surface); box-shadow:var(--shadow-sm);
+  transition:border-color .3s ease, box-shadow .3s ease, transform .3s ease;
+}
+.faq-list .accordion-item:first-child{ border-top:1px solid var(--line); }
+.faq-list .accordion-item:hover{ border-color:var(--line-2); box-shadow:var(--shadow-md); }
+.faq-list .accordion-item.open{ border-color:var(--violet); }
+.faq-list .accordion-head{ padding:20px 22px; }
+.faq-list .accordion-num{
+  width:26px; height:26px; border-radius:50%; background:var(--violet-soft); color:var(--violet-deep);
+  display:flex; align-items:center; justify-content:center; font-size:11.5px; font-weight:600; width:26px;
+}
+.faq-list .accordion-body-inner{ padding-right:22px !important; padding-bottom:26px !important; }
+
+/* ============================================================
+   12. FINAL CTA
+   ============================================================ */
+.final-cta{ background:var(--ink); color:#fff; text-align:center; padding:100px 0; position:relative; overflow:hidden; }
+@media (min-width:768px){ .final-cta{ padding:150px 0; } }
+.final-cta::before{
+  content:''; position:absolute; inset:0;
+  background:radial-gradient(ellipse 60% 50% at 50% 100%, rgba(108,76,240,0.35), transparent 70%);
+}
+.final-cta .wrap{ position:relative; z-index:1; }
+.final-cta h2{ font-size:clamp(28px,5vw,56px); line-height:1.15; max-width:820px; margin:0 auto; letter-spacing:-0.03em; }
+.final-cta h2 .muted{ color:rgba(255,255,255,0.42); }
+.final-cta .btn{ margin-top:42px; }
+
+/* ============================================================
+   13. FOOTER
+   ============================================================ */
+footer{ background:var(--ink); color:rgba(255,255,255,0.5); padding:32px 0; font-size:13px; }
+footer .wrap{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; }
+
+/* ============================================================
+   14. UTIL
+   ============================================================ */
+.magnetic{ will-change:transform; }
+:focus-visible{ outline:2px solid var(--violet); outline-offset:3px; }
+</style>
 </head>
-
 <body>
 
-  <!-- Navigation -->
-  <div class="nav">
-    <div class="container nav-inner">
-      <a href="#" class="brand">
-        <div class="logo"></div>
-        <h1>Glad Aura</h1>
-      </a>
-      <div class="nav-links">
-        <a href="#what">Program</a>
-        <a href="#how">How it works</a>
-        <a href="#skills">Skills</a>
-        <a href="#pricing">Pricing</a>
-        <a class="cta" href="https://forms.gle/CCMgJy6pTXorpbCZ9" target="_blank">Get Demo</a>
+<!-- =========================================================
+     CONFIG (edit these to update the whole page)
+     ========================================================= -->
+<script>
+  window.SITE_CONFIG = {
+    whatsappNumber: "919216141141", // country code + number, no + or spaces
+    whatsappMessage: "Hello! I'm interested in joining the Applied AI Skills Program starting on 10th July.",
+    batchDate: "10th July",
+    priceRegular: "₹9,999",
+    priceLaunch: "₹5,999"
+  };
+</script>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<nav class="nav" id="nav">
+  <div class="wrap">
+    <a href="#top" class="brand">
+      <svg class="brand-mark" viewBox="0 0 30 30" fill="none"><circle cx="15" cy="15" r="13.5" stroke="#14152A" stroke-width="1.4"/><circle cx="15" cy="15" r="3.6" fill="#6C4CF0"/><circle cx="23.5" cy="9" r="1.9" fill="#0FBFA8"/><circle cx="6.5" cy="20.5" r="1.9" fill="#FF5A73"/><line x1="15" y1="15" x2="23.5" y2="9" stroke="#14152A" stroke-width="1"/><line x1="15" y1="15" x2="6.5" y2="20.5" stroke="#14152A" stroke-width="1"/></svg>
+      Applied AI Skills
+    </a>
+    <div class="nav-links">
+      <a href="#build">What You'll Build</a>
+      <a href="#journey">Curriculum</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <a href="#" class="btn btn-primary whatsapp-cta">Enroll Now</a>
+  </div>
+</nav>
+
+<!-- =========================================================
+     HERO
+     ========================================================= -->
+<header class="hero" id="top">
+  <div class="hero-blob b1"></div>
+  <div class="hero-blob b2"></div>
+  <div class="hero-blob b3"></div>
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <div class="hero-chip"><span class="dot-badge">LIVE</span> Cohort starts <span id="heroBatchDate" style="color:var(--ink); margin-left:3px;">10th July</span></div>
+        <h1>Using AI is common.<br><span class="grad-text">Building with it isn't.</span></h1>
+        <p class="hero-sub">A 6-week live program that moves you from asking AI questions to shipping real things with it — websites, media, tools, and a portfolio to prove it. No coding required.</p>
+        <div class="hero-cta">
+          <a href="#" class="btn btn-primary btn-lg magnetic whatsapp-cta">Enroll Now
+            <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="#build" class="btn btn-secondary btn-lg magnetic">Explore the Program</a>
+        </div>
+        <div class="hero-trust">
+          <div class="item"><svg class="ic" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg> Live Online Classes</div>
+          <div class="item"><svg class="ic" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg> No Coding Required</div>
+          <div class="item"><svg class="ic" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg> 1:1 Mentorship</div>
+          <div class="item"><svg class="ic" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg> Real Portfolio</div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="float-card c1"><div class="ic-wrap icon-violet-solid" style="background:var(--violet-soft);">🌐</div><h5>Website</h5><p>Built with AI, live in days</p></div>
+        <div class="float-card c2"><div class="ic-wrap" style="background:var(--teal-soft);">🎙️</div><h5>Voiceover</h5><p>Natural, studio-quality</p></div>
+        <div class="float-card c3"><div class="ic-wrap" style="background:var(--coral-soft);">📊</div><h5>Presentation</h5><p>Deck that tells a story</p></div>
+        <div class="float-card c4"><div class="ic-wrap" style="background:var(--amber-soft);">🎨</div><h5>AI Image</h5><p>No designer needed</p></div>
       </div>
     </div>
   </div>
+</header>
 
-  <!-- Hero -->
-  <header class="hero">
-    <div class="container hero-grid">
-      <div>
-        <span class="eyebrow">🌟 India’s first story-led life skills audio program</span>
-        <h2>Life skills your child will carry forever</h2>
-        <p>Weekly, story-led audios for Grades 1–8 — building values, focus, confidence, and real-world thinking.</p>
-        <div class="badges">
-          <span class="badge">🎧 Just 30 mins a week</span>
-          <span class="badge">🏫 School‑ready</span>
-          <span class="badge">👪 Parent‑friendly</span>
-          <span class="badge">📚 NEP 2020 ready</span>
+<!-- =========================================================
+     SECTION: WHAT CAN YOU BUILD (bento grid)
+     ========================================================= -->
+<section class="section network-section" id="build">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">The output space</div>
+      <h2>One skill. An entire universe of output.</h2>
+      <p>Everything below is something you'll actually walk away able to make.</p>
+    </div>
+    <div class="bento-grid" id="bentoGrid"></div>
+  </div>
+</section>
+
+<!-- =========================================================
+     SECTION: LEARNING JOURNEY
+     ========================================================= -->
+<section class="section" id="journey" style="scroll-margin-top:80px;">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow" style="color:var(--indigo-deep);">Curriculum &amp; learning journey</div>
+      <h2>Five modules, six weeks — structured as a transformation, not a syllabus.</h2>
+      <p>Every stage below is a full curriculum module: what it covers, what you'll learn, and what you'll walk away having built.</p>
+    </div>
+    <div class="journey-stages" id="journeyStages"></div>
+    <div id="journeyPanels"></div>
+  </div>
+</section>
+
+<!-- =========================================================
+     SECTION: BUILD REAL PROJECTS
+     ========================================================= -->
+<section class="section" style="background:var(--surface);" id="projects">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow" style="color:var(--coral-deep);">What you'll ship</div>
+      <h2>Real projects, not exercises.</h2>
+      <p>Every module ends with something tangible — grouped here by the five stages of the program.</p>
+    </div>
+    <div class="ship-grid" id="projectsGrid"></div>
+  </div>
+</section>
+
+<!-- =========================================================
+     SECTION: COURSE SNAPSHOT
+     ========================================================= -->
+<section class="section" style="padding-top:0;">
+  <div class="wrap">
+    <div class="snapshot-card reveal">
+      <div class="snap-item"><div class="snap-label">Program Duration</div><div class="snap-value"><span class="counter" data-target="6">0</span> Weeks</div></div>
+      <div class="snap-item"><div class="snap-label">Format</div><div class="snap-value">Live Online</div></div>
+      <div class="snap-item"><div class="snap-label">Class Duration</div><div class="snap-value"><span class="counter" data-target="1">0</span> Hour Daily</div></div>
+      <div class="snap-item"><div class="snap-label">Schedule</div><div class="snap-value"><span class="counter" data-target="6">0</span> Days / Week</div></div>
+      <div class="snap-item"><div class="snap-label">Next Batch</div><div class="snap-value accent" id="snapBatchDate">Starts 10th July</div></div>
+      <div class="snap-item"><div class="snap-label">Traditional Coding</div><div class="snap-value">Not Required</div></div>
+      <div class="snap-item"><div class="snap-label">Learning Style</div><div class="snap-value">Project-Based</div></div>
+      <div class="snap-item"><div class="snap-label">Support</div><div class="snap-value">1:1 + Community</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     SECTION: PRICING
+     ========================================================= -->
+<section class="section" style="background:var(--surface);" id="pricing">
+  <div class="wrap">
+    <div class="section-head center reveal" style="margin-left:auto;margin-right:auto;">
+      <div class="eyebrow" style="color:var(--teal-deep);">Enrollment</div>
+      <h2>One price. Everything included.</h2>
+    </div>
+    <div class="pricing-wrap reveal">
+      <div class="price-card">
+        <div class="price-badge">Launch Pricing · Limited Seats</div>
+        <div class="price-row">
+          <span class="price-old" id="priceOld">₹9,999</span>
+          <span class="price-new" id="priceNew">₹5,999</span>
         </div>
-        <div class="buttons">
-          <a class="btn primary" href="https://forms.gle/CCMgJy6pTXorpbCZ9" target="_blank">Book a demo</a>
-          <a class="btn secondary" href="#what">Explore program</a>
-        </div>
-      </div>
-      <div>
-        <div class="phone">
-          <div class="screen">
-            <div class="phone-card">
-              <strong>Skill 1 • Audio</strong>
-              <div>Inspiring, story-first episode introducing an essential life skill your child can relate to and remember.</div>
-            </div>
-            <div class="phone-card">
-              <strong>Skill 2 • Audio</strong>
-              <div>A fresh adventure that builds confident thinking, wise decision-making, and practical life habits.</div>
-            </div>
-            <div class="phone-card">
-              <strong> Bedtime Story• Audio</strong>
-              <div>A soothing cultural or motivational tale to end the day — no tasks, just calm.</div>
-            </div>
-            <div class="phone-card">
-              <strong> Reflective Activity/Questions</strong>
-              <div>A fun, simple task or a thoughtful questions based on the skill stories — helping children practise and apply what they’ve learned.</div>
-            </div>
-            <div class="phone-card">
-              <strong>Healthy Me • Family</strong>
-              <div>Audio tips for parents on health, habits, & mindfulness to support child’s well-being.</div>
-            </div>
-          </div>
-        </div>
+        <div class="price-note">One-time payment · Batch starts <span id="priceBatchDate">10th July</span></div>
+        <ul class="price-features">
+          <li><span class="mark">✓</span> Live Online Classes</li>
+          <li><span class="mark">✓</span> 6 Weeks, 6 Days a Week</li>
+          <li><span class="mark">✓</span> 1 Hour Daily Live Session</li>
+          <li><span class="mark">✓</span> Practical, Real-World Projects</li>
+          <li><span class="mark">✓</span> Portfolio Building</li>
+          <li><span class="mark">✓</span> One-to-One Guidance</li>
+          <li><span class="mark">✓</span> Community Access</li>
+        </ul>
+        <a href="#" class="btn btn-coral btn-lg whatsapp-cta">Enroll Now</a>
+        <div class="price-foot">Opens WhatsApp with your enrollment message pre-filled</div>
       </div>
     </div>
-  </header>
+  </div>
+</section>
 
-  <!-- What is Glad Aura -->
-  <section id="what" class="section-alt">
-    <div class="container">
-      <h3 class="sec-title">What is Glad Aura?</h3>
-      <p class="sec-sub">Glad Aura is India’s first life skills audio program where engaging stories become lasting habits.
-In one short, joyful weekly session, children listen, reflect, and practice — while parents enjoy a safe, ad-free experience they can trust.</p>
-      <div class="grid-3">
-        <div class="feature">
-          <h4>🎯 Stories that teach</h4>
-          <p>Two skill-based episodes + one calming bedtime story every week. Each one makes values and thinking skills easy to grasp.</p>
-        </div>
-        <div class="feature">
-          <h4>⚡ Effortless learning</h4>
-          <p>Only 20–30 minutes a week. No tests, no pressure — just natural growth through curiosity.</p>
-        </div>
-        <div class="feature">
-          <h4>🌱 Skills for the real world</h4>
-          <p>Focus, empathy, decision-making, emotional balance, digital discipline — woven into relatable, memorable stories.</p>
-        </div>
-      </div>
+<!-- =========================================================
+     SECTION: FAQ
+     ========================================================= -->
+<section class="section" id="faq">
+  <div class="wrap">
+    <div class="section-head center reveal" style="margin-left:auto;margin-right:auto;">
+      <div class="eyebrow">Questions</div>
+      <h2>Everything you're probably wondering.</h2>
     </div>
-  </section>
+    <div class="faq-list" id="faqAccordion"></div>
+  </div>
+</section>
 
-  <!-- Why it matters -->
-  <section>
-    <div class="container">
-      <h3 class="sec-title">Why it matters</h3>
-      <div class="grid-3">
-        <div class="feature">
-          <h4>🌈 Stronger values, sharper focus</h4>
-          <p>Consistent, light-touch learning builds better habits and wise choices.</p>
-        </div>
-        <div class="feature">
-          <h4>❤️ Emotional intelligence</h4>
-          <p>Kids learn to understand feelings, self-regulate, and respond with empathy.</p>
-        </div>
-        <div class="feature">
-          <h4>🏆 Confident expression</h4>
-          <p>Story prompts and guided reflection help them speak up and share ideas naturally.</p>
-        </div>
-        <div class="feature">
-          <h4>👨‍👩‍👧‍👦 Stronger family bonds</h4>
-          <p>Quick, 5-minute at-home activities connect parents and children — no homework stress.</p>
-        </div>
-        <div class="feature">
-          <h4>📚 Curriculum connected</h4>
-          <p>Aligned with NEP 2020, SEL, and FLN goals while complementing school learning.</p>
-        </div>
-        <div class="feature">
-          <h4>🔒 Safe & private</h4>
-          <p>No ads. No tracking. Just a protected space for growth.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-<!-- HOW IT WORKS - Learning Timeline -->
- <div class="hiw-wrapper">
-  <section id="how" class="how-it-works">
-    <h2 class="hiw-heading">How it Works</h2>
-    <p class="hiw-subheading">Three simple steps from listening to lasting habits</p>
-    <div class="hiw-steps">
-      <div class="hiw-card">
-        <div class="hiw-number">1</div>
-        <h3>🟡 Core Skill Episodes</h3>
-        <p>Two episodes introducing a life skill or value through relatable, memorable storytelling.</p>
-        <div class="hiw-labels">
-          <span>5–7 min</span>
-          <span>Listen & See</span>
-          <span>Relatable Story</span>
-        </div>
-      </div>
-      <div class="hiw-card">
-        <div class="hiw-number">2</div>
-        <h3>🌙 Bedtime Story</h3>
-        <p>A cultural, motivational, or inspirational tale to end the week calmly — no activities, just gentle reflection.</p>
-        <div class="hiw-labels">
-          <span>5–7 min</span>
-          <span>Calm Listening</span>
-          <span>Gentle Reflection</span>
-        </div>
-      </div>
-      <div class="hiw-card">
-        <div class="hiw-number">3</div>
-        <h3>📝 Weekly Reflection</h3>
-        <p>One fun activity or set of questions based on the two skill stories, plus a short 2–3 min audio tip for parents.</p>
-        <div class="hiw-labels">
-          <span>2–3 min</span>
-          <span>Simple Task</span>
-          <span>Real Life Practice</span>
-        </div>
-      </div>
-    </div>
-  </section>
-</div>
+<!-- =========================================================
+     FINAL CTA
+     ========================================================= -->
+<section class="final-cta">
+  <div class="wrap">
+    <h2 class="reveal">AI is becoming a fundamental skill.<br><span class="muted">The opportunity isn't using it. It's knowing how to build with it.</span></h2>
+    <a href="#" class="btn btn-coral btn-lg whatsapp-cta reveal">Start Building — Enroll Now</a>
+  </div>
+</section>
 
-  <!-- SKILLS - Accordion -->
-  <section id="skills" class="section-skills">
-    <div class="container">
-      <h3 class="sec-title">Core life skills covered</h3>
-      <p class="sec-sub">Click any skill area to explore what your students will learn and practice.</p>
-      
-      <div class="skills-container">
-        <div class="skills-grid">
-          <div class="skill-card">
-            <div class="skill-header">
-              <div class="skill-title">
-                <span class="skill-emoji">💛</span>
-                <span>Feelings & Friends</span>
-              </div>
-              <div class="skill-chevron">▾</div>
-            </div>
-            <div class="skill-content">
-              <p class="skill-desc">Emotional and social intelligence through understanding feelings, building empathy, practicing active listening, and developing meaningful friendships.</p>
-            </div>
-          </div>
+<footer>
+  <div class="wrap">
+    <div>© <span id="year"></span> Applied AI Skills Program</div>
+    <div>Live Online · 6 Weeks · No Coding Required</div>
+  </div>
+</footer>
 
-          <div class="skill-card">
-            <div class="skill-header">
-              <div class="skill-title">
-                <span class="skill-emoji">🌱</span>
-                <span>Smart Thinking</span>
-              </div>
-              <div class="skill-chevron">▾</div>
-            </div>
-            <div class="skill-content">
-              <p class="skill-desc">Critical thinking and problem‑solving skills using real‑world scenarios, logical reasoning, and creative approaches to challenges.</p>
-            </div>
-          </div>
+<script>
+(function(){
+  "use strict";
+  var CFG = window.SITE_CONFIG;
 
-          <div class="skill-card">
-            <div class="skill-header">
-              <div class="skill-title">
-                <span class="skill-emoji">🙏</span>
-                <span>Culture & Values</span>
-              </div>
-              <div class="skill-chevron">▾</div>
-            </div>
-            <div class="skill-content">
-              <p class="skill-desc">Cultural appreciation, devotional practices, and ethical decision‑making that foster respect, gratitude, and moral character.</p>
-            </div>
-          </div>
+  /* -----------------------------------------------------------
+     Populate configurable text + WhatsApp links
+  ----------------------------------------------------------- */
+  document.getElementById('year').textContent = new Date().getFullYear();
+  document.getElementById('heroBatchDate').textContent = CFG.batchDate;
+  document.getElementById('snapBatchDate').textContent = 'Starts ' + CFG.batchDate;
+  document.getElementById('priceBatchDate').textContent = CFG.batchDate;
+  document.getElementById('priceOld').textContent = CFG.priceRegular;
+  document.getElementById('priceNew').textContent = CFG.priceLaunch;
 
-          <div class="skill-card">
-            <div class="skill-header">
-              <div class="skill-title">
-                <span class="skill-emoji">📱</span>
-                <span>Digital Life</span>
-              </div>
-              <div class="skill-chevron">▾</div>
-            </div>
-            <div class="skill-content">
-              <p class="skill-desc">Healthy technology habits, media literacy, cyber safety awareness, and balanced screen time management for the digital age.</p>
-            </div>
-          </div>
+  function whatsappLink(){
+    return 'https://wa.me/' + CFG.whatsappNumber + '?text=' + encodeURIComponent(CFG.whatsappMessage);
+  }
+  document.querySelectorAll('.whatsapp-cta').forEach(function(btn){
+    btn.setAttribute('href', whatsappLink());
+    btn.setAttribute('target', '_blank');
+    btn.setAttribute('rel', 'noopener');
+  });
 
-          <div class="skill-card">
-            <div class="skill-header">
-              <div class="skill-title">
-                <span class="skill-emoji">🍎</span>
-                <span>Healthy Me</span>
-              </div>
-              <div class="skill-chevron">▾</div>
-            </div>
-            <div class="skill-content">
-              <p class="skill-desc">Nutrition awareness, sleep hygiene, physical activity, and body awareness practices that support lifelong wellness habits.</p>
-            </div>
-          </div>
+  /* -----------------------------------------------------------
+     Nav scroll state + progress bar
+  ----------------------------------------------------------- */
+  var nav = document.getElementById('nav');
+  var progressBar = document.getElementById('progressBar');
+  function onScroll(){
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+    var h = document.documentElement;
+    var pct = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    progressBar.style.width = pct + '%';
+  }
+  document.addEventListener('scroll', onScroll, { passive:true });
+  onScroll();
 
-          <div class="skill-card">
-            <div class="skill-header">
-              <div class="skill-title">
-                <span class="skill-emoji">🗣️</span>
-                <span>Say It Right</span>
-              </div>
-              <div class="skill-chevron">▾</div>
-            </div>
-            <div class="skill-content">
-              <p class="skill-desc">Effective communication, confident public speaking, active listening skills, and respectful dialogue in all social settings.</p>
-            </div>
-          </div>
+  /* -----------------------------------------------------------
+     Reveal on scroll (re-runs for dynamically added nodes too)
+  ----------------------------------------------------------- */
+  function observeReveal(root){
+    var items = root.querySelectorAll('.reveal:not(.in-view)');
+    if(!('IntersectionObserver' in window)){
+      items.forEach(function(el){ el.classList.add('in-view'); });
+      return;
+    }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){ entry.target.classList.add('in-view'); io.unobserve(entry.target); }
+      });
+    }, { threshold:0.12 });
+    items.forEach(function(el){ io.observe(el); });
+  }
+  observeReveal(document);
 
-          <div class="skill-card">
-            <div class="skill-header">
-              <div class="skill-title">
-                <span class="skill-emoji">🎨</span>
-                <span>Imagination Station</span>
-              </div>
-              <div class="skill-chevron">▾</div>
-            </div>
-            <div class="skill-content">
-              <p class="skill-desc">Creative expression, artistic thinking, visualization techniques, and innovative problem‑solving through imagination and play.</p>
-            </div>
-          </div>
+  /* -----------------------------------------------------------
+     Magnetic buttons (desktop only — skip on touch)
+  ----------------------------------------------------------- */
+  if(window.matchMedia('(hover: hover)').matches){
+    document.querySelectorAll('.magnetic').forEach(function(btn){
+      btn.addEventListener('mousemove', function(e){
+        var r = btn.getBoundingClientRect();
+        var x = (e.clientX - r.left - r.width/2) * 0.22;
+        var y = (e.clientY - r.top - r.height/2) * 0.3;
+        btn.style.transform = 'translate(' + x + 'px,' + y + 'px)';
+      });
+      btn.addEventListener('mouseleave', function(){ btn.style.transform = 'translate(0,0)'; });
+    });
+  }
 
-          <div class="skill-card">
-            <div class="skill-header">
-              <div class="skill-title">
-                <span class="skill-emoji">🌏</span>
-                <span>Clean Earth, Good Manners</span>
-              </div>
-              <div class="skill-chevron">▾</div>
-            </div>
-            <div class="skill-content">
-              <p class="skill-desc">Environmental stewardship, civic responsibility, social etiquette, and community service that creates positive impact.</p>
-            </div>
-          </div>
+  /* -----------------------------------------------------------
+     Counters
+  ----------------------------------------------------------- */
+  var counters = document.querySelectorAll('.counter');
+  if('IntersectionObserver' in window && counters.length){
+    var counted = new WeakSet();
+    var cIO = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting && !counted.has(entry.target)){
+          counted.add(entry.target);
+          var el = entry.target;
+          var target = parseInt(el.getAttribute('data-target'), 10);
+          var duration = 800, startTime = null;
+          function step(ts){
+            if(!startTime) startTime = ts;
+            var progress = Math.min((ts-startTime)/duration, 1);
+            el.textContent = Math.floor(progress * target);
+            if(progress < 1) requestAnimationFrame(step); else el.textContent = target;
+          }
+          requestAnimationFrame(step);
+        }
+      });
+    }, { threshold:0.6 });
+    counters.forEach(function(c){ cIO.observe(c); });
+  }
 
-          <div class="skill-card">
-            <div class="skill-header">
-              <div class="skill-title">
-                <span class="skill-emoji">🎯</span>
-                <span>Trying Again & Staying on Track</span>
-              </div>
-              <div class="skill-chevron">▾</div>
-            </div>
-            <div class="skill-content">
-              <p class="skill-desc">Growth mindset, resilience building, goal‑setting strategies, and self‑discipline practices for overcoming challenges.</p>
-            </div>
-          </div>
+  /* =============================================================
+     CONTENT SOURCE — from Applied_AI_Skills_Program.pdf
+     Single source of truth for Journey + Curriculum + Projects
+  ============================================================= */
+  var MODULES = [
+    {
+      stage: 'Discover',
+      title: "Understanding AI & Today's AI Ecosystem",
+      overview: "Before you build anything, you need to understand what you're actually working with — and how far to trust it.",
+      learn: [
+        "What Artificial Intelligence is and how it is changing the world",
+        "Understanding modern AI models and assistants",
+        "Choosing the right AI for different tasks",
+        "Strengths, limitations, and common misconceptions",
+        "Responsible, ethical, and safe AI usage",
+        "When to trust AI — and when to verify its outputs",
+        "Setting up your personal AI workspace"
+      ],
+      build: ["Personal AI Workspace", "AI Decision Guide"],
+      outcome: "Understand modern AI with confidence and use it responsibly."
+    },
+    {
+      stage: 'Collaborate',
+      title: "Working Effectively with AI",
+      overview: "AI is only as good as the conversation you have with it. This is where you learn to lead that conversation.",
+      learn: [
+        "Asking better questions",
+        "Giving clear instructions",
+        "Providing meaningful context",
+        "Refining conversations for better results",
+        "Improving AI responses through iteration",
+        "Generating structured and organized outputs",
+        "Improving quality, consistency, and accuracy",
+        "Solving real-world problems with AI"
+      ],
+      build: ["AI Prompt Playbook", "Personal AI Productivity Playbook"],
+      outcome: "Work confidently with AI to consistently produce high-quality results."
+    },
+    {
+      stage: 'Create',
+      title: "Learning, Research & Creation with AI",
+      overview: "Turn AI into a team — one that helps you learn faster, research smarter, and produce real, professional work.",
+      learn: [
+        "Building your own AI team for different tasks",
+        "Learning new topics faster with AI",
+        "Researching efficiently and responsibly",
+        "Organizing knowledge and reference material",
+        "Creating summaries, notes, and study resources",
+        "Writing professional documents and reports",
+        "Creating presentations",
+        "Planning and repurposing content",
+        "Developing repeatable AI workflows for everyday work"
+      ],
+      build: ["Your Own AI Team", "Study Resources", "Research Reports", "Professional Documents", "Articles", "Presentations", "Social Media Content"],
+      outcome: "Learn faster, research smarter, and create professional-quality work with AI."
+    },
+    {
+      stage: 'Produce',
+      title: "AI Media Creation",
+      overview: "Words are only the start. Now you create the images, voice, and video that make your work feel finished.",
+      learn: [
+        "Creating high-quality AI images",
+        "Visual storytelling and creative design",
+        "Voice generation and narration",
+        "Voiceovers and audiobooks",
+        "AI-assisted video creation",
+        "Short-form and faceless content workflows",
+        "Combining images, audio, and video into complete multimedia projects"
+      ],
+      build: ["AI Images", "Marketing & Creative Visuals", "Voiceovers", "Audiobooks", "Short Videos", "Multimedia Projects"],
+      outcome: "Create professional-quality multimedia content using modern AI."
+    },
+    {
+      stage: 'Build',
+      title: "Building AI-Powered Projects & Portfolio",
+      overview: "Everything comes together — into real, working things you can show, share, and build a career on.",
+      learn: [
+        "Turning ideas into practical digital solutions",
+        "Building websites with AI assistance",
+        "Creating interactive learning pages",
+        "Building quizzes and educational games",
+        "Creating useful digital tools",
+        "Showcasing your work professionally",
+        "Exploring AI career paths and specialization opportunities"
+      ],
+      build: ["Website", "Interactive Learning Page", "Quiz or Educational Game", "Digital Tool", "Capstone Project", "Portfolio Showcase"],
+      outcome: "Graduate with a portfolio of real AI-powered projects and a clear roadmap for your next AI specialization."
+    }
+  ];
 
-          <div class="skill-card">
-            <div class="skill-header">
-              <div class="skill-title">
-                <span class="skill-emoji">🔍</span>
-                <span>Being You & Helping Others</span>
-              </div>
-              <div class="skill-chevron">▾</div>
-            </div>
-            <div class="skill-content">
-              <p class="skill-desc">Identity development, purpose discovery, gratitude practices, and leadership skills through service and helping others.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  var GRADUATION = {
+    stage: 'Launch',
+    checks: [
+      "Understand modern AI and use it responsibly",
+      "Work effectively with leading AI models",
+      "Build your own AI team for learning, research, writing, productivity, and creativity",
+      "Learn, research, and create professional-quality content faster",
+      "Generate AI-powered images, audio, and videos",
+      "Build websites, educational tools, and digital projects without traditional coding",
+      "Showcase a portfolio of practical AI-powered work",
+      "Identify career opportunities and confidently choose your next AI specialization"
+    ]
+  };
 
-  <!-- WHY SCHOOLS LOVE IT - Benefits -->
-  <section class="section-benefits">
-    <div class="container">
-      <h3 class="sec-title">Why schools choose Glad Aura</h3>
-      <p class="sec-sub">A program designed to enhance your educational impact while respecting teacher time and family schedules.</p>
-      
-      <div class="benefits-grid">
-        <div class="benefit-card">
-          <div class="benefit-icon">⚡</div>
-          <h4 class="benefit-title">Zero Extra Work</h4>
-          <p class="benefit-desc">Ready-to-use format. No lesson planning. Just press play, then guide simple, meaningful reflections.</p>
-        </div>
+  var NETWORK_ITEMS = [
+    { label: "Websites", desc: "Ship a working site without touching a framework.", icon:"🌐", color:"violet" },
+    { label: "AI Images", desc: "Generate visuals that used to need a designer.", icon:"🎨", color:"coral" },
+    { label: "Voiceovers", desc: "Turn any script into a natural, human-sounding voice.", icon:"🎙️", color:"teal" },
+    { label: "Study Resources", desc: "Compress hours of reading into notes that stick.", icon:"📚", color:"amber" },
+    { label: "Research Reports", desc: "Go from a question to structured findings, fast.", icon:"🔍", color:"violet" },
+    { label: "Professional Documents", desc: "Draft polished documents that read like you hired someone.", icon:"📄", color:"teal" },
+    { label: "Presentations", desc: "Build a deck that tells a story, not just fills slides.", icon:"📊", color:"coral" },
+    { label: "Interactive Learning Pages", desc: "Teach a concept through something people click, not just read.", icon:"🧩", color:"amber" },
+    { label: "Educational Quizzes", desc: "Turn any topic into something people can test themselves on.", icon:"❓", color:"violet" },
+    { label: "Digital Tools", desc: "Small utilities that solve one problem really well.", icon:"🛠️", color:"teal" },
+    { label: "Portfolio Projects", desc: "Proof of what you can do, not just what you know.", icon:"💼", color:"coral" },
+    { label: "Marketing Visuals", desc: "Campaign-ready graphics without a design team.", icon:"📣", color:"amber" },
+    { label: "Creative Content", desc: "Stories, scripts, and ideas — produced, not just imagined.", icon:"✨", color:"violet" },
+    { label: "Knowledge Organization", desc: "Turn scattered information into something usable.", icon:"🗂️", color:"teal" },
+    { label: "Productivity", desc: "Systems that quietly handle the repetitive parts of your work.", icon:"⚡", color:"coral" },
+    { label: "Problem Solving", desc: "A sharp thinking partner for the hard decisions.", icon:"🧠", color:"amber" }
+  ];
 
-        <div class="benefit-card">
-          <div class="benefit-icon">👨‍👩‍👧‍👦</div>
-          <h4 class="benefit-title">Family Engagement</h4>
-          <p class="benefit-desc">5-minute activities that strengthen bonds without adding homework load.</p>
-        </div>
+  var STAGE_COLORS = {
+    Discover:  { color:'var(--violet)', soft:'var(--violet-soft)', text:'var(--violet-deep)' },
+    Collaborate:{ color:'var(--indigo)', soft:'var(--indigo-soft)', text:'var(--indigo-deep)' },
+    Create:    { color:'var(--teal)',   soft:'var(--teal-soft)',   text:'var(--teal-deep)' },
+    Produce:   { color:'var(--coral)',  soft:'var(--coral-soft)',  text:'var(--coral-deep)' },
+    Build:     { color:'var(--amber)',  soft:'var(--amber-soft)',  text:'var(--amber-deep)' },
+    Launch:    { color:'var(--violet)', soft:'var(--violet-soft)', text:'var(--violet-deep)' }
+  };
+  function stageStyle(stageName){
+    var s = STAGE_COLORS[stageName] || STAGE_COLORS.Discover;
+    return '--stage-color:' + s.color + ';--stage-soft:' + s.soft + ';--stage-text:' + s.text + ';';
+  }
 
-        <div class="benefit-card">
-          <div class="benefit-icon">💰</div>
-          <h4 class="benefit-title">Flexible Pricing</h4>
-          <p class="benefit-desc">Affordable plans that scale from pilot classes to full-school rollouts.</p>
-        </div>
+  /* -----------------------------------------------------------
+     Render: Bento grid (Section 2) — mobile-safe, always visible
+  ----------------------------------------------------------- */
+  (function renderBento(){
+    var grid = document.getElementById('bentoGrid');
+    NETWORK_ITEMS.forEach(function(item, i){
+      var card = document.createElement('div');
+      card.className = 'bento-card reveal';
+      card.tabIndex = 0;
+      card.innerHTML =
+        '<div class="bento-icon icon-' + item.color + '">' + item.icon + '</div>' +
+        '<div><h4>' + item.label + '</h4><p>' + item.desc + '</p></div>';
+      grid.appendChild(card);
+    });
+    observeReveal(grid);
+  })();
 
-        <div class="benefit-card">
-          <div class="benefit-icon">🏆</div>
-          <h4 class="benefit-title">School Excellence</h4>
-          <p class="benefit-desc">Deliver measurable SEL outcomes and whole-child growth parents notice.</p>
-        </div>
+  /* -----------------------------------------------------------
+     Render: Journey stages + panels (Section 3)
+  ----------------------------------------------------------- */
+  (function renderJourney(){
+    var stagesEl = document.getElementById('journeyStages');
+    var panelsEl = document.getElementById('journeyPanels');
+    var allStages = MODULES.map(function(m){ return m.stage; }).concat([GRADUATION.stage]);
 
-        <div class="benefit-card">
-          <div class="benefit-icon">🌐</div>
-          <h4 class="benefit-title">Reliable Access</h4>
-          <p class="benefit-desc">Delivered directly on WhatsApp — no app to install, no logins. Save audios on your phone and listen anytime, online or offline.</p>
-        </div>
+    allStages.forEach(function(stage, i){
+      var tab = document.createElement('div');
+      tab.className = 'journey-stage' + (i===0 ? ' active' : '');
+      tab.setAttribute('data-index', i);
+      tab.setAttribute('style', stageStyle(stage));
+      tab.innerHTML = '<span class="num">0' + (i+1) + '</span> ' + stage;
+      stagesEl.appendChild(tab);
+    });
 
-        <div class="benefit-card">
-          <div class="benefit-icon">🗣️</div>
-          <h4 class="benefit-title">Bilingual Stories</h4>
-          <p class="benefit-desc">Simple, engaging English–Hindi mix for easy understanding and wider connection.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+    MODULES.forEach(function(mod, i){
+      var panel = document.createElement('div');
+      panel.className = 'journey-panel' + (i===0 ? ' active' : '');
+      panel.setAttribute('data-panel', i);
+      panel.setAttribute('style', stageStyle(mod.stage));
+      panel.innerHTML =
+        '<div>' +
+          '<span class="module-tag">Module 0' + (i+1) + ' · ' + mod.stage + '</span>' +
+          '<h3>' + mod.title + '</h3>' +
+          '<p class="overview">' + mod.overview + '</p>' +
+          '<div class="journey-outcome">✓ ' + mod.outcome + '</div>' +
+        '</div>' +
+        '<div class="journey-lists">' +
+          '<div class="journey-list"><div class="journey-list-title">What You\'ll Learn</div><ul>' + mod.learn.map(function(l){ return '<li>'+l+'</li>'; }).join('') + '</ul></div>' +
+          '<div class="journey-list"><div class="journey-list-title">What You\'ll Build</div><div class="journey-build-chips">' + mod.build.map(function(b){ return '<span class="chip">'+b+'</span>'; }).join('') + '</div></div>' +
+        '</div>';
+      panelsEl.appendChild(panel);
+    });
 
-  <!-- Pricing -->
-  <section id="pricing" class="section-alt">
-    <div class="container">
-      <h3 class="sec-title">Simple, transparent pricing</h3>
-      <p class="sec-sub">Choose the plan that works for you — quarterly or yearly — and give your students life skills they’ll carry forever.</p>
-      
-      <div class="pricing">
-        <div class="price-card">
-          <div class="tag">Paid Annually</div>
-          <div class="price">₹150 <small>per student/month</small></div>
-          <ul class="price-features">
-            <li>No Setup Fees</li>
-            <li>12+ audio episodes every month</li>
-            <li>Progress badges & certificates</li>
-            <li>Detailed SEL dashboards</li>
-            <li>No App or Logins - just press play</li>
-          </ul>
-          <div><a class="btn primary" href="https://forms.gle/CCMgJy6pTXorpbCZ9" target="_blank">Book Demo</a></div>
-        </div>
-        
-        <div class="price-card">
-          <div class="tag" style="background:linear-gradient(135deg, var(--amber), #f59e0b)">Paid Quarterly</div>
-          <div class="price">₹175 <small>per student/month</small></div>
-          <ul class="price-features">
-            <li>No Setup Fees</li>
-            <li>12+ audio episodes every month</li>
-            <li>Progress badges & certificates</li>
-            <li>Detailed SEL dashboards</li>
-            <li>No App or Logins - just press play</li>
-          </ul>
-          <div><a class="btn primary" href="https://forms.gle/CCMgJy6pTXorpbCZ9" target="_blank">Book demo</a></div>
-        </div>
-        
-        <div class="price-card">
-          <div class="tag" style="background:linear-gradient(135deg, var(--green), #10b981)">Enterprise</div>
-          <div class="price">Custom <small>multi‑school pricing</small></div>
-          <ul class="price-features">
-            <li>Multiple school groups</li>
-            <li>Language localization</li>
-            <li>Offline distribution support</li>
-            <li>Dedicated success manager</li>
-          </ul>
-          <div><a class="btn primary" href="https://forms.gle/CCMgJy6pTXorpbCZ9" target="_blank">Contact sales</a></div>
-        </div>
-      </div>
-    </div>
-  </section>
+    var launchPanel = document.createElement('div');
+    launchPanel.className = 'journey-panel';
+    launchPanel.setAttribute('data-panel', MODULES.length);
+    launchPanel.setAttribute('style', stageStyle('Launch'));
+    launchPanel.innerHTML =
+      '<div class="launch-panel" style="grid-column:1/-1;">' +
+        '<span class="module-tag">Graduation</span>' +
+        '<h3>By the end of this program, you\'ll be able to:</h3>' +
+        '<ul class="checks">' + GRADUATION.checks.map(function(c){ return '<li><span class="mark">✓</span>'+c+'</li>'; }).join('') + '</ul>' +
+      '</div>';
+    panelsEl.appendChild(launchPanel);
 
-  <!-- Testimonials -->
-  <section>
-    <div class="container">
-      <h3 class="sec-title">What educators and families say</h3>
-      <div class="testis">
-        <div class="quote">
-          <p>"Finally, a program that teaches children the skills schools can’t always cover — in a way they actually enjoy."</p>
-          <div class="who">— Parent of a Grade 4 Student</div>
-        </div>
-        <div class="quote">
-          <p>"The stories feel real and relatable. My son asks to listen again on his own, which says everything."</p>
-          <div class="who">— Parent of a Grade 6 Student</div>
-        </div>
-        <div class="quote">
-          <p>"As a teacher, I can see this fitting neatly into our timetable without extra work — and with lasting impact."</p>
-          <div class="who">— Teacher, Sri Ganganagar</div>
-        </div>
-      </div>
-    </div>
-  </section>
+    stagesEl.querySelectorAll('.journey-stage').forEach(function(tab){
+      tab.addEventListener('click', function(){
+        var idx = tab.getAttribute('data-index');
+        stagesEl.querySelectorAll('.journey-stage').forEach(function(t){ t.classList.remove('active'); });
+        tab.classList.add('active');
+        panelsEl.querySelectorAll('.journey-panel').forEach(function(p){
+          p.classList.toggle('active', p.getAttribute('data-panel') === idx);
+        });
+      });
+    });
+  })();
 
- 
-  <!-- Footer -->
-  <footer>
-    <div class="container foot-grid">
-      <div>
-        <div class="brand" style="margin-bottom:16px">
-          <div class="logo"></div>
-          <div><h1>Glad Aura</h1></div>
-        </div>
-        <p style="color:var(--text-soft); margin:0 0 12px">Life skills that last a lifetime</p>
-        <small>© <span id="yr"></span> Glad Aura. All rights reserved.</small>
-      </div>
-      <div>
-        <h4>Program</h4>
-        <a href="#what">What is Glad Aura</a><br/>
-        <a href="#how">How it works</a><br/>
-        <a href="#skills">Skills covered</a>
-      </div>
-      <div>
-        <h4>For Schools</h4>
-        <a href="#pricing">Pricing plans</a><br/>
-        <a href="https://forms.gle/CCMgJy6pTXorpbCZ9" target="_blank">Request demo</a><br/>
-        <a href="#testimonials">Success stories</a>
-      </div>
-      <div>
-        <h4>Get in touch</h4>
-        <a href="https://forms.gle/CCMgJy6pTXorpbCZ9" target="_blank">Send a quick Message</a><br/>  
-      </div>
-    </div>
-  </footer>
+  /* -----------------------------------------------------------
+     Render: What You'll Ship — compact, one card per module (Section 4)
+  ----------------------------------------------------------- */
+  (function renderProjects(){
+    var grid = document.getElementById('projectsGrid');
+    MODULES.forEach(function(mod, i){
+      var card = document.createElement('div');
+      card.className = 'ship-card reveal';
+      card.setAttribute('style', stageStyle(mod.stage));
+      card.innerHTML =
+        '<div class="ship-tag">Module 0' + (i+1) + ' · ' + mod.stage + '</div>' +
+        '<h4>' + mod.title + '</h4>' +
+        '<p>' + mod.outcome + '</p>' +
+        '<div class="ship-chips">' + mod.build.map(function(b){ return '<span>' + b + '</span>'; }).join('') + '</div>';
+      grid.appendChild(card);
+    });
+    observeReveal(grid);
+  })();
 
-  
+  /* -----------------------------------------------------------
+     Render: FAQ accordion (Section 8)
+  ----------------------------------------------------------- */
+  (function renderFAQ(){
+    var FAQS = [
+      { q:"Who is this program for?", a:"Anyone who wants to use AI as more than a search bar — students, professionals, and career-switchers. No technical background required." },
+      { q:"Do I need coding knowledge?", a:"No. Every project in this program is built using AI tools and clear instructions, not code." },
+      { q:"Are the classes live?", a:"Yes. All sessions are live and online, so you can ask questions and get feedback in real time." },
+      { q:"How long is each class?", a:"One hour a day, six days a week, for six weeks." },
+      { q:"Will I build real projects?", a:"Yes — every module ends with something real: a document, a design, a tool, or a piece of your portfolio." },
+      { q:"What happens after completing the program?", a:"You graduate with a working portfolio and a clear view of which AI specialization to pursue next." }
+    ];
+    var wrap = document.getElementById('faqAccordion');
+    FAQS.forEach(function(f, i){
+      var item = document.createElement('div');
+      item.className = 'accordion-item';
+      item.innerHTML =
+        '<button class="accordion-head" aria-expanded="false">' +
+          '<div class="left"><span class="accordion-num">0' + (i+1) + '</span><span class="accordion-title" style="font-size:15.5px;">' + f.q + '</span></div>' +
+          '<span class="accordion-icon"></span>' +
+        '</button>' +
+        '<div class="accordion-body"><div class="accordion-body-inner" style="display:block; padding-left:40px;"><p class="overview-text" style="margin:0;">' + f.a + '</p></div></div>';
+      wrap.appendChild(item);
+    });
+    wrap.querySelectorAll('.accordion-head').forEach(function(head){
+      head.addEventListener('click', function(){
+        var item = head.closest('.accordion-item');
+        var body = item.querySelector('.accordion-body');
+        var isOpen = item.classList.contains('open');
+        wrap.querySelectorAll('.accordion-item').forEach(function(it){
+          it.classList.remove('open');
+          it.querySelector('.accordion-body').style.maxHeight = null;
+          it.querySelector('.accordion-head').setAttribute('aria-expanded','false');
+        });
+        if(!isOpen){
+          item.classList.add('open');
+          body.style.maxHeight = body.scrollHeight + 'px';
+          head.setAttribute('aria-expanded','true');
+        }
+      });
+    });
+  })();
 
-
-<!-- App JS -->
-<script src="assets/app.js" defer></script>
+})();
+</script>
 </body>
 </html>
